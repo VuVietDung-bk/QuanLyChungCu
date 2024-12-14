@@ -25,10 +25,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class userScreenController implements Initializable {
-	
+
 	Stage stage;
 	Scene scene;
-	
+
 	Account userAcc = new LoginController().getUsingAccount();
 	@FXML
 	private Pane userAptInfoPane;
@@ -277,6 +277,7 @@ public class userScreenController implements Initializable {
     	Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);

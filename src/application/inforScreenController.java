@@ -296,6 +296,7 @@ public class inforScreenController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -477,6 +478,7 @@ public class inforScreenController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("InformationScreen.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -487,6 +489,7 @@ public class inforScreenController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("FeeScreen.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -497,6 +500,7 @@ public class inforScreenController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("FeeManagementScreen.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -507,6 +511,7 @@ public class inforScreenController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("AccountScreen.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);

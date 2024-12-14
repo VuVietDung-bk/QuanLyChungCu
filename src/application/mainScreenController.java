@@ -9,17 +9,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class mainScreenController {
 	private Stage stage;
 	private Scene scene;
+
+	@FXML
+	ImageView Image;
 		
 	public void information(ActionEvent e) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("InformationScreen.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		StyleManager.applyStyle(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
 		stage.show();
@@ -30,6 +35,7 @@ public class mainScreenController {
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		StyleManager.applyStyle(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
 		stage.show();
@@ -40,6 +46,7 @@ public class mainScreenController {
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		StyleManager.applyStyle(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
 		stage.show();
@@ -50,6 +57,7 @@ public class mainScreenController {
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		StyleManager.applyStyle(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
 		stage.show();
@@ -60,6 +68,7 @@ public class mainScreenController {
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		StyleManager.applyStyle(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
 		stage.show();

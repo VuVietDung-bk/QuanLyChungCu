@@ -1,10 +1,10 @@
 -- Create the database
-CREATE DATABASE ApartmentManagement;
+CREATE DATABASE IF NOT EXISTS ApartmentManagement;
 USE ApartmentManagement;
 
 -- Create the Resident table
 CREATE TABLE Resident (
-    id CHAR(12) PRIMARY KEY, -- Fixed 12-digit ID
+    id VARCHAR(12) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(50)
 );
@@ -12,7 +12,7 @@ CREATE TABLE Resident (
 -- Create the Account table
 CREATE TABLE Account (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    residentID CHAR(12),
+    residentID VARCHAR(12),
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     type VARCHAR(50) DEFAULT 'user',
@@ -21,20 +21,20 @@ CREATE TABLE Account (
 
 -- Create the Apartment table
 CREATE TABLE Apartment (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    ownerID INT,
-    vehicleAmount INT,
-    electric INT,
-    water INT,
+    id VARCHAR(12) PRIMARY KEY,
+    ownerID VARCHAR(12),
+    vehicleAmount INT DEFAULT 0,
+    electric INT DEFAULT 0,
+    water INT DEFAULT 0,
     area INT NOT NULL,
-    FOREIGN KEY (ownerID) REFERENCES Account(id)
+    FOREIGN KEY (ownerID) REFERENCES Resident(id)
 );
 
 -- Create the Fee table
 CREATE TABLE Fee (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    apartmentID INT,
-    typeFee ENUM('Living Expense', 'Vehicle', 'Water', 'Electricity', 'Volunteer') DEFAULT 'Living Expense',
+    apartmentID VARCHAR(12),
+    typeFee VARCHAR(255) DEFAULT 'Living Expenses',
     isForced INT DEFAULT 1,
     status INT DEFAULT 0,
     amount INT DEFAULT 0,
@@ -43,9 +43,9 @@ CREATE TABLE Fee (
 
 -- Create the Relationship table
 CREATE TABLE Relationship (
-    id CHAR(12),
-    ownerID CHAR(12),
-    relationship ENUM('Dad', 'Mom', 'Son', 'Daughter', 'Grandparent', 'Sibling') NOT NULL,
+    id VARCHAR(12),
+    ownerID VARCHAR(12),
+    relationship VARCHAR(255) NOT NULL,
     FOREIGN KEY (id) REFERENCES Resident(id),
     FOREIGN KEY (ownerID) REFERENCES Resident(id)
 );
@@ -53,67 +53,46 @@ CREATE TABLE Relationship (
 -- Create the Vehicle table
 CREATE TABLE Vehicle (
     vehicleID VARCHAR(50) PRIMARY KEY,
-    apartmentID INT,
+    apartmentID VARCHAR(12),
     type VARCHAR(50) NOT NULL,
     FOREIGN KEY (apartmentID) REFERENCES Apartment(id)
 );
 
 -- Insert sample data into Resident
 INSERT INTO Resident (id, name, phone) VALUES
-('03810201901', 'John Doe', '123-456-7890'),
-('03820201902', 'Jane Doe', '987-654-3210'),
-('03810201903', 'Mike Doe', '555-123-4567'),
-('03810201904', 'Sarah Doe', '444-555-6666'),
-('03820201905', 'Emma Doe', '111-222-3333');
+('038201000001', 'John Doe', '123-456-7890'),
+('038201000002', 'Alice Smith', '987-654-3210'),
+('038201000003', 'Bruce Wayne', '555-123-4567');
 
--- Insert sample data into Account (one account per apartment + admin account)
+-- Insert sample data into Account
 INSERT INTO Account (residentID, username, password, type) VALUES
-('03810201901', 'john_doe', 'password123', 'user'),
-('03820201902', 'jane_doe', 'password456', 'user'),
-('03810201903', 'admin', 'admin123', 'admin'); -- Admin account linked to a resident
+('038201000001', 'johndoe', 'password123', 'user'),
+('038201000002', 'alicesmith', 'password456', 'user'),
+('038201000003', 'admin', 'adminpass', 'admin');
 
 -- Insert sample data into Apartment
-INSERT INTO Apartment (ownerID, vehicleAmount, electric, water, area) VALUES
-(1, 2, 500, 300, 1200),
-(2, 1, 700, 400, 1500);
+INSERT INTO Apartment (id, ownerID, vehicleAmount, electric, water, area) VALUES
+('APT001', '038201000001', 2, 500, 300, 1200),
+('APT002', '038201000002', 1, 700, 400, 1500),
+('APT003', '038201000003', 3, 800, 600, 2000);
 
 -- Insert sample data into Fee
 INSERT INTO Fee (apartmentID, typeFee, isForced, status, amount) VALUES
-(1, 'Living Expense', 1, 0, 1000),
-(1, 'Vehicle', 1, 0, 200),
-(1, 'Water', 1, 0, 300),
-(1, 'Electricity', 1, 0, 400),
-(1, 'Volunteer', 0, 0, 50),
-(2, 'Living Expense', 1, 0, 1200),
-(2, 'Vehicle', 1, 0, 100),
-(2, 'Water', 1, 0, 400),
-(2, 'Electricity', 1, 0, 500),
-(2, 'Volunteer', 0, 0, 75);
+('APT001', 'Living Expenses', 1, 1, 1000),
+('APT002', 'Water', 1, 0, 500),
+('APT003', 'Electricity', 1, 1, 1500);
 
 -- Insert sample data into Relationship
 INSERT INTO Relationship (id, ownerID, relationship) VALUES
-('03820201902', '03810201901', 'Mom'),
-('03810201903', '03810201901', 'Son'),
-('03810201904', '03810201901', 'Daughter'),
-('03820201905', '03810201901', 'Grandparent');
+('038201000002', '038201000001', 'Spouse'),
+('038201000003', '038201000002', 'Sibling'),
+('038201000001', '038201000003', 'Parent');
 
 -- Insert sample data into Vehicle
 INSERT INTO Vehicle (vehicleID, apartmentID, type) VALUES
-('VEH001', 1, 'Car'),
-('VEH002', 1, 'Bike'),
-('VEH003', 2, 'Scooter');
-
--- Query data to verify
-SELECT * FROM Resident;
-SELECT * FROM Account;
-SELECT * FROM Apartment;
-SELECT * FROM Fee;
-SELECT * FROM Relationship;
-SELECT * FROM Vehicle;
-
--- Validation query for vehicle count consistency
-SELECT a.id AS ApartmentID, a.vehicleAmount, COUNT(v.vehicleID) AS VehicleCount
-FROM Apartment a
-LEFT JOIN Vehicle v ON a.id = v.apartmentID
-GROUP BY a.id, a.vehicleAmount
-HAVING a.vehicleAmount != COUNT(v.vehicleID);
+('VEH123', 'APT001', 'Car'),
+('VEH124', 'APT001', 'Bike'),
+('VEH125', 'APT002', 'Scooter'),
+('VEH126', 'APT003', 'Truck'),
+('VEH127', 'APT003', 'Motorcycle'),
+('VEH128', 'APT003', 'Bicycle');

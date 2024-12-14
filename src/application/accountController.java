@@ -18,6 +18,7 @@ import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -25,7 +26,7 @@ public class accountController implements Initializable {
 	
 	Stage stage;
 	Scene scene;
-	
+
 	@FXML
 	private Label accountOwnerName;
 	@FXML
@@ -34,6 +35,8 @@ public class accountController implements Initializable {
 	private Label accountOwnerPhone;
 	@FXML
 	private Label accountType;
+	@FXML
+	ImageView Image;
 	@FXML
 	private Pane resetPasswordPane;
 	@FXML
@@ -55,35 +58,35 @@ public class accountController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		dataResident = DatabaseConnecter.getResidentsData();
 		
-		accountOwnerName.setText("Ten chu tai khoan: "+findName(using.getAccountOwnerID()));
+		accountOwnerName.setText("Tên chủ tài khoản: "+findName(using.getAccountOwnerID()));
 		accountOwnerID.setText("CCCD: "+using.getAccountOwnerID());
-		accountOwnerPhone.setText("So dien thoai: "+findPhone(using.getAccountOwnerID()));
-		accountType.setText("Loai tai khoan: "+using.getAccountType());	
+		accountOwnerPhone.setText("Số điện thoại: "+findPhone(using.getAccountOwnerID()));
+		accountType.setText("Loại tài khoản: "+using.getAccountType());	
 		confirmButton.setOnAction(e -> {
 			String currentPass = currentPassText.getText();
 			String newPass = newPassText.getText();
 			String confirmNewPass = confirmNewPassText.getText();
 			if(currentPassText.getText().isEmpty() || newPassText.getText().isEmpty() || confirmNewPassText.getText().isEmpty()) {
-				note.setText("Vui long nhap day du cac dong!!!");
+				note.setText("Vui lòng nhập đầy đủ các dòng!!!");
 				note.setVisible(true);
 				return;
 			}
 			if(!currentPass.equals(using.getAccountPassword())) {
-				note.setText("Sai mat khau hien tai!!!");
+				note.setText("Sai mật khẩu hiện tại!!!");
 				note.setVisible(true);
 				return;
 			}
 			if(!newPass.equals(confirmNewPass)) {
-				note.setText("Mat khau khong trung khop!!!");
+				note.setText("Mật khẩu không trùng khớp!!!");
 				note.setVisible(true);
 				return;
 			}
 			if(newPass.equals(currentPass)) {
-				note.setText("Vui long nhap mat khau moi!");
+				note.setText("Vui lòng nhập mật khẩu mới!");
 				note.setVisible(true);
 				return;
 			}
-			note.setText("Doi mat khau thanh cong!");
+			note.setText("Đổi mật khẩu thành công!");
 			note.setVisible(true);
 			using.setAccountPassword(newPass);
 			System.out.println(using.getAccountPassword());
@@ -98,6 +101,7 @@ public class accountController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("InformationScreen.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -108,6 +112,7 @@ public class accountController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("FeeScreen.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -118,6 +123,7 @@ public class accountController implements Initializable {
 		Parent root = FXMLLoader.load(getClass().getResource("FeeManagementScreen.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);
@@ -128,6 +134,7 @@ public class accountController implements Initializable {
     	Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		StyleManager.applyStyle(scene);
 		stage.setScene(scene);
 		stage.centerOnScreen();
 		stage.setResizable(false);

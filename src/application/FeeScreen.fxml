@@ -6,28 +6,30 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.feeScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.feeScreenController">
    <children>
       <SplitPane dividerPositions="0.1980600750938673" layoutX="6.0" layoutY="81.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
         <items>
-          <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e6ffff;">
                <children>
-                  <Button layoutX="99.0" layoutY="2.0" mnemonicParsing="false" onAction="#switchToInfoScreen" prefHeight="50.0" text="Thong tin can ho" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="99.0" layoutY="50.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" text="Thu phi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-                  <Button layoutX="99.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" text="Quan ly cac khoan thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                  <Button layoutX="99.0" layoutY="537.0" mnemonicParsing="false" onAction="#switchToAccountScreen" prefHeight="50.0" text="Quan ly tai khoan" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Button layoutX="99.0" layoutY="2.0" mnemonicParsing="false" onAction="#switchToInfoScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thong tin can ho" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="99.0" layoutY="50.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thu phi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                  <Button layoutX="99.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quan ly cac khoan thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                  <Button layoutX="99.0" layoutY="537.0" mnemonicParsing="false" onAction="#switchToAccountScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quan ly tai khoan" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e6ffff;">
                <children>
                   <Pane fx:id="findAptPane" layoutX="393.0" layoutY="294.0">
                      <children>
                         <TextField fx:id="aptID" layoutX="50.0" prefHeight="30.0" prefWidth="150.0" promptText="Moi nhap ma can ho" />
                         <Label prefHeight="30.0" prefWidth="50.0" text="Can ho" />
-                        <Button fx:id="find" layoutX="200.0" mnemonicParsing="false" prefHeight="30.0" text="Tim" />
+                        <Button fx:id="find" layoutX="200.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #d0eeff;" text="Tim" />
                      </children>
                   </Pane>
                   <Pane fx:id="ComputeFee" prefHeight="618.4" prefWidth="1022.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -59,7 +61,7 @@
                               <Label fx:id="feeServiceLabel" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" text="Tien dich vu" />
                               <Label fx:id="feeElecLabel" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" text="Tinh tien dien" />
                               <Label fx:id="feeWaterLabel" layoutX="200.0" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" text="Tinh tien nuoc" />
-                              <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" text="Gui thong bao" />
+                              <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" style="-fx-background-color: #d0eeff;" text="Gui thong bao" />
                            </children>
                         </Pane>
                         <Pane fx:id="addOtherFeePane" layoutX="650.0" layoutY="130.0" onKeyPressed="#pressEnter" visible="false">
@@ -68,7 +70,7 @@
                               <TextField fx:id="otherFeeAmount" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" promptText="Tien can dong" />
                               <Label fx:id="isForce" layoutY="70.0" prefHeight="30.0" prefWidth="50.0" text="Bat buoc" />
                               <CheckBox fx:id="isForceCheck" layoutX="50.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
-                              <Button layoutX="230.0" layoutY="35.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" prefWidth="100.0" text="Gui thong bao" />
+                              <Button layoutX="230.0" layoutY="35.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Gui thong bao" />
                            </children>
                         </Pane>
                      </children>
@@ -77,7 +79,12 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button layoutX="1228.0" layoutY="2.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" text="Dang xuat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="850.0" layoutY="14.0" prefHeight="30.0" prefWidth="130.0" text="Loai tai khoan: Admin" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="0.0" />
+      <ImageView fitHeight="96.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banner.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1228.0" layoutY="2.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Dang xuat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="1160.0" layoutY="33.0" prefHeight="30.0" prefWidth="130.0" text="Loai tai khoan: Admin" AnchorPane.rightAnchor="-10.400000000000091" AnchorPane.topAnchor="33.0" />
    </children>
 </AnchorPane>

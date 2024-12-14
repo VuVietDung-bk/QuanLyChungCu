@@ -6,27 +6,28 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.inforScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #e6ffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.inforScreenController">
    <children>
       <SplitPane dividerPositions="0.1980600750938673" layoutY="100.0" prefHeight="620.0" prefWidth="1280.0">
         <items>
-          <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="150.0" prefHeight="618.0" prefWidth="167.0">
+          <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="150.0" prefHeight="618.0" prefWidth="167.0" style="-fx-background-color: #e6ffff;">
                <children>
-                  <Button layoutX="153.0" layoutY="2.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" text="Thong tin can ho" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutX="163.0" layoutY="50.0" mnemonicParsing="false" onAction="#switchToFeeScreen" prefHeight="50.0" text="Thu phi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-                  <Button layoutX="163.0" layoutY="101.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" text="Quan ly cac khoan thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                  <Button layoutX="163.0" layoutY="592.0" mnemonicParsing="false" onAction="#switchToAccountScreen" prefHeight="50.0" text="Tai khoan" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Button layoutX="153.0" layoutY="2.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thong tin can ho" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="163.0" layoutY="50.0" mnemonicParsing="false" onAction="#switchToFeeScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thu phi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                  <Button layoutX="163.0" layoutY="101.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quan ly cac khoan thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                  <Button layoutX="163.0" layoutY="592.0" mnemonicParsing="false" onAction="#switchToAccountScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Tai khoan" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #e6ffff;">
                <children>
-                  <TableView fx:id="AptTableView" layoutX="31.0" layoutY="33.0" prefHeight="618.4" prefWidth="851.2" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
-                  <Button fx:id="deleteButton" layoutX="971.0" layoutY="592.0" mnemonicParsing="false" onAction="#deleteSelectedRow" prefHeight="30.0" prefWidth="150.0" text="Xoa ho gia dinh" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <Button fx:id="addButton" layoutX="721.0" layoutY="589.0" mnemonicParsing="false" onAction="#addApartment" prefHeight="30.0" prefWidth="150.0" text="Them ho gia dinh" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="152.0" />
+                  <TableView fx:id="AptTableView" layoutX="31.0" layoutY="33.0" prefHeight="618.4" prefWidth="851.2" style="-fx-background-color: #e6ffff;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
+                  <Button fx:id="deleteButton" layoutX="971.0" layoutY="592.0" mnemonicParsing="false" onAction="#deleteSelectedRow" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #d0eeff;" text="Xoa ho gia dinh" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Button fx:id="addButton" layoutX="721.0" layoutY="589.0" mnemonicParsing="false" onAction="#addApartment" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #d0eeff;" text="Them ho gia dinh" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="152.0" />
                   <Pane fx:id="detailPane" disable="true" layoutX="-7.0" prefHeight="618.4" prefWidth="1022.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label fx:id="aptIDLabel" layoutX="50.0" layoutY="50.0" prefHeight="30.0" prefWidth="50.0" text="aptID" />
@@ -39,7 +40,7 @@
                         <Label fx:id="areaLabel" layoutX="50.0" layoutY="295.0" prefHeight="30.0" prefWidth="150.0" text="Dien tich" />
                         <Label layoutX="50.0" layoutY="330.0" prefHeight="30.0" prefWidth="250.0" text="Thong tin phuong tien" />
                         <TableView fx:id="relationshipTableView" layoutX="450.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="560.0" />
-                        <Button layoutX="660.0" layoutY="320.0" mnemonicParsing="false" onAction="#addRelaInDetailScreen" prefHeight="25.0" prefWidth="120.0" text="Them thanh vien" />
+                        <Button layoutX="660.0" layoutY="320.0" mnemonicParsing="false" onAction="#addRelaInDetailScreen" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #d0eeff;" text="Them thanh vien" />
                         <Pane fx:id="addRelaPane" layoutX="450.0" layoutY="370.0" visible="false">
                            <children>
                               <Label prefHeight="30.0" prefWidth="70.0" text="Ho va ten:" />
@@ -48,10 +49,10 @@
                               <TextField fx:id="addID" layoutX="330.0" prefHeight="30.0" prefWidth="150.0" />
                               <Label layoutY="45.0" prefHeight="30.0" prefWidth="70.0" text="Quan he:" />
                               <TextField fx:id="addRela" layoutX="70.0" layoutY="45.0" prefHeight="30.0" prefWidth="180.0" />
-                              <Button layoutX="238.0" layoutY="90.0" mnemonicParsing="false" onAction="#confirmInDetailScreen" text="Xac nhan" />
+                              <Button layoutX="238.0" layoutY="90.0" mnemonicParsing="false" onAction="#confirmInDetailScreen" style="-fx-background-color: #d0eeff;" text="Xac nhan" />
                            </children>
                         </Pane>
-                        <Button layoutX="950.0" layoutY="302.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="60.0" text="Refresh" />
+                        <Button layoutX="950.0" layoutY="302.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #d0eeff;" text="Refresh" />
                         <TableView fx:id="vehicleTableView" layoutX="50.0" layoutY="370.0" prefHeight="190.0" prefWidth="360.0" />
                      </children>
                   </Pane>
@@ -69,16 +70,16 @@
                               <TextField fx:id="phoneText" layoutX="150.0" layoutY="120.0" prefHeight="30.0" prefWidth="150.0" />
                               <Label layoutY="160.0" prefHeight="30.0" prefWidth="150.0" text="Dien tich can ho" />
                               <TextField fx:id="areaText" layoutX="150.0" layoutY="160.0" prefHeight="30.0" prefWidth="150.0" />
-                              <Button layoutX="115.0" layoutY="210.0" mnemonicParsing="false" onAction="#confirmAddApt" prefHeight="30.0" prefWidth="70.0" text="Xac nhan" />
+                              <Button layoutX="115.0" layoutY="210.0" mnemonicParsing="false" onAction="#confirmAddApt" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Xac nhan" />
                            </children>
                         </Pane>
                         <Pane fx:id="addInfoForNewAptPane" layoutX="70.0" layoutY="90.0" visible="false">
                            <children>
                               <TableView fx:id="addRelaTableView" prefHeight="200.0" prefWidth="400.0" />
-                              <Button layoutX="330.0" layoutY="200.0" mnemonicParsing="false" onAction="#refreshAddRela" prefHeight="30.0" prefWidth="70.0" text="Refresh" />
-                              <Button layoutX="810.0" layoutY="200.0" mnemonicParsing="false" onAction="#refreshAddVehicle" prefHeight="30.0" prefWidth="70.0" text="Refresh" />
-                              <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#addRelaForNewApt" prefHeight="25.0" prefWidth="120.0" text="Them thanh vien" />
-                              <Button layoutX="620.0" layoutY="240.0" mnemonicParsing="false" onAction="#addVehicleForNewApt" prefHeight="25.0" prefWidth="120.0" text="Them phuong tien" />
+                              <Button layoutX="330.0" layoutY="200.0" mnemonicParsing="false" onAction="#refreshAddRela" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Refresh" />
+                              <Button layoutX="810.0" layoutY="200.0" mnemonicParsing="false" onAction="#refreshAddVehicle" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Refresh" />
+                              <Button layoutX="150.0" layoutY="240.0" mnemonicParsing="false" onAction="#addRelaForNewApt" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #d0eeff;" text="Them thanh vien" />
+                              <Button layoutX="620.0" layoutY="240.0" mnemonicParsing="false" onAction="#addVehicleForNewApt" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #d0eeff;" text="Them phuong tien" />
                               <Pane fx:id="addNewAptRelaPane" layoutY="290.0" visible="false">
                                  <children>
                                     <Label prefHeight="30.0" prefWidth="70.0" text="Ho va ten" />
@@ -87,7 +88,7 @@
                                     <TextField fx:id="addNameText" layoutX="70.0" prefHeight="30.0" prefWidth="250.0" />
                                     <TextField fx:id="addIDText" layoutX="70.0" layoutY="40.0" prefHeight="30.0" prefWidth="250.0" />
                                     <TextField fx:id="addRelaText" layoutX="70.0" layoutY="80.0" prefHeight="30.0" prefWidth="250.0" />
-                                    <Button layoutX="160.0" layoutY="125.0" mnemonicParsing="false" onAction="#confirmAddRelaForNewApt" prefHeight="30.0" prefWidth="70.0" text="Xac nhan" />
+                                    <Button layoutX="160.0" layoutY="125.0" mnemonicParsing="false" onAction="#confirmAddRelaForNewApt" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Xac nhan" />
                                  </children>
                               </Pane>
                               <Pane fx:id="addNewAptVehiclePane" layoutX="480.0" layoutY="290.0" visible="false">
@@ -96,27 +97,27 @@
                                     <TextField fx:id="addVehicleIDText" layoutX="70.0" prefHeight="30.0" prefWidth="250.0" />
                                     <ChoiceBox fx:id="typeVehicle" layoutX="70.0" layoutY="40.0" prefHeight="30.0" prefWidth="100.0" />
                                     <Label layoutY="40.0" prefHeight="30.0" prefWidth="70.0" text="Loai xe" />
-                                    <Button layoutX="160.0" layoutY="125.0" mnemonicParsing="false" onAction="#confirmAddVehicleForNewApt" prefHeight="30.0" prefWidth="70.0" text="Xac nhan" />
+                                    <Button layoutX="160.0" layoutY="125.0" mnemonicParsing="false" onAction="#confirmAddVehicleForNewApt" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Xac nhan" />
                                  </children>
                               </Pane>
-                              <Button layoutX="410.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="70.0" text="Hoan tat" />
+                              <Button layoutX="410.0" layoutY="460.0" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Hoan tat" />
                               <TableView fx:id="addVehicleTableView" layoutX="480.0" prefHeight="200.0" prefWidth="400.0" />
                            </children>
                         </Pane>
                      </children>
                   </Pane>
                   <TextField fx:id="searchBar" layoutX="74.0" layoutY="2.0" prefHeight="30.0" prefWidth="400.0" AnchorPane.bottomAnchor="587.2" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="1.0" />
-                  <Button fx:id="selectAll" layoutX="471.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Chon tat ca" AnchorPane.leftAnchor="471.0" AnchorPane.topAnchor="1.0" />
+                  <Button fx:id="selectAll" layoutX="471.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Chon tat ca" AnchorPane.leftAnchor="471.0" AnchorPane.topAnchor="1.0" />
                </children>
             </AnchorPane>
         </items>
       </SplitPane>
-      <Button layoutX="1228.0" layoutY="1.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="100.0" text="Dang xuat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="1152.0" prefHeight="30.0" prefWidth="150.0" text="Loai tai khoan: Admin" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
-      <Label layoutX="590.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" text="BlueMoon Management App">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
+      <ImageView fitHeight="96.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banner.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1228.0" layoutY="1.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Dang xuat" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="1154.0" layoutY="30.0" prefHeight="30.0" prefWidth="150.0" text="Loai tai khoan: Admin" AnchorPane.rightAnchor="-24.40000000000009" AnchorPane.topAnchor="30.0" />
    </children>
 </AnchorPane>

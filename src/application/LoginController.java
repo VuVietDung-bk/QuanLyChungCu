@@ -55,7 +55,7 @@ public class LoginController implements Initializable {
 	
 	ObservableList<Account> dataAcc;
 	ObservableList<Resident> dataResident;
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		dataAcc = DatabaseConnecter.getAccountsData();
@@ -103,6 +103,7 @@ public class LoginController implements Initializable {
 			Parent root = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
 			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			scene = new Scene(root);
+			StyleManager.applyStyle(scene);
 			stage.setScene(scene);
 			stage.setResizable(false);
 			stage.centerOnScreen();
@@ -112,6 +113,7 @@ public class LoginController implements Initializable {
 			Parent root = FXMLLoader.load(getClass().getResource("UserScreen.fxml"));
 			stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			scene = new Scene(root);
+			StyleManager.applyStyle(scene);
 			stage.setScene(scene);
 			stage.setResizable(false);
 			stage.centerOnScreen();

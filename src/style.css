@@ -1,0 +1,7 @@
+@font-face {
+    src: url("ShopeeDisplay-Medium.ttf");
+}
+
+* {
+    -fx-font-family: "Shopee Display Med";
+}
