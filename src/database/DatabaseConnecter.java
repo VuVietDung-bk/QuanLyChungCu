@@ -370,27 +370,108 @@ public class DatabaseConnecter {
     }
     
     public static boolean deleteApartmentById(String apartmentId) {
-        String query = "DELETE FROM Apartment WHERE id = ?";
+        String deleteFeeQuery = "DELETE FROM Fee WHERE apartmentID = ?";
+        String deleteVehicleQuery = "DELETE FROM Vehicle WHERE apartmentID = ?";
+        String selectOwnerQuery = "SELECT ownerID FROM Apartment WHERE id = ?";
+        String selectRelatedResidentsQuery = "SELECT id FROM Relationship WHERE ownerID = ? OR id = ?";
+        String deleteAccountQuery = "DELETE FROM Account WHERE residentID = ?";
+        String deleteRelationshipQuery = "DELETE FROM Relationship WHERE id = ? OR ownerID = ?";
+        String deleteResidentQuery = "DELETE FROM Resident WHERE id = ?";
+        String deleteApartmentQuery = "DELETE FROM Apartment WHERE id = ?";
+
         Connection connection = null;
+        PreparedStatement preparedStatement = null;
         boolean isDeleted = false;
 
         try {
-            connection = getConnection(); 
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, apartmentId);
+            connection = getConnection();
+            connection.setAutoCommit(false); // Enable transaction management
 
+            // Step 1: Retrieve the ownerID of the apartment
+            String ownerID = null;
+            preparedStatement = connection.prepareStatement(selectOwnerQuery);
+            preparedStatement.setString(1, apartmentId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                ownerID = resultSet.getString("ownerID");
+            }
+            resultSet.close();
+            preparedStatement.close();
+
+            if (ownerID == null) {
+                System.err.println("No Apartment found with the provided ID.");
+                return false; // Abort if the apartment does not exist
+            }
+
+            // Step 2: Delete all related Fees
+            preparedStatement = connection.prepareStatement(deleteFeeQuery);
+            preparedStatement.setString(1, apartmentId);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            // Step 3: Delete all related Vehicles
+            preparedStatement = connection.prepareStatement(deleteVehicleQuery);
+            preparedStatement.setString(1, apartmentId);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            
+            // Step 4: Delete the Apartment itself
+            preparedStatement = connection.prepareStatement(deleteApartmentQuery);
+            preparedStatement.setString(1, apartmentId);
             int rowsAffected = preparedStatement.executeUpdate();
             isDeleted = rowsAffected > 0;
-
             preparedStatement.close();
+
+            // Step 5: Delete related Accounts
+            preparedStatement = connection.prepareStatement(deleteAccountQuery);
+            preparedStatement.setString(1, ownerID);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            // Step 6: Delete related Relationships
+            preparedStatement = connection.prepareStatement(deleteRelationshipQuery);
+            preparedStatement.setString(1, ownerID);
+            preparedStatement.setString(2, ownerID);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            // Step 7: Find and delete all Residents involved in relationships
+            preparedStatement = connection.prepareStatement(selectRelatedResidentsQuery);
+            preparedStatement.setString(1, ownerID);
+            preparedStatement.setString(2, ownerID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String residentID = resultSet.getString("id");
+
+                // Delete each Resident
+                PreparedStatement deleteResidentStatement = connection.prepareStatement(deleteResidentQuery);
+                deleteResidentStatement.setString(1, residentID);
+                deleteResidentStatement.executeUpdate();
+                deleteResidentStatement.close();
+            }
+            resultSet.close();
+            preparedStatement.close();
+            
+            // Commit the transaction
+            connection.commit();
         } catch (SQLException | DatabaseConnectionException e) {
             e.printStackTrace();
+            if (connection != null) {
+                try {
+                    connection.rollback(); // Rollback changes in case of errors
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
         } finally {
             closeConnection(connection);
         }
 
         return isDeleted;
     }
+
+
     
     public static boolean deleteFee(String apartmentID, String typeFee, int isForced, int status, int amount) {
         String query = "DELETE FROM Fee WHERE apartmentID = ? AND typeFee = ? AND isForced = ? AND status = ? AND amount = ?";
@@ -426,6 +507,41 @@ public class DatabaseConnecter {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public static boolean deleteVehicle(String vehicleID) {
+        String query = "DELETE FROM Vehicle WHERE vehicleID = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        boolean isDeleted = false;
+
+        try {
+            connection = getConnection(); // Get the database connection
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the parameter for the querys
+            preparedStatement.setString(1, vehicleID);
+
+            // Execute the delete query
+            int rowsAffected = preparedStatement.executeUpdate();
+            isDeleted = rowsAffected > 0;
+
+        } catch (SQLException | DatabaseConnectionException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isDeleted;
     }
 
     public static boolean insertApartment(String aptID, String newAptOwnerID, int vehicleAmount, int electric, int water, int area) {
