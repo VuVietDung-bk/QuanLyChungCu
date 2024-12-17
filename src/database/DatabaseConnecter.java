@@ -452,9 +452,6 @@ public class DatabaseConnecter {
             }
             resultSet.close();
             preparedStatement.close();
-            
-            // Commit the transaction
-            connection.commit();
         } catch (SQLException | DatabaseConnectionException e) {
             e.printStackTrace();
             if (connection != null) {
