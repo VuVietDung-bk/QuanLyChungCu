@@ -106,6 +106,17 @@ public class inforScreenController implements Initializable {
 	private TextField addVehicleIDText;
 	@FXML
 	private ChoiceBox<String> typeVehicle;
+	@FXML
+	private Pane searchBarPane;
+	@FXML
+	private Pane addVehiclePane;
+	@FXML
+	private ChoiceBox<String> typeVehicleInDetailScreen;
+	@FXML
+	private TextField addVehicleText;
+	@FXML
+	private Button deleteVehicle;
+	
 
 	static String currentChoice;
 
@@ -146,10 +157,10 @@ public class inforScreenController implements Initializable {
 		TableColumn<Apartment, Integer> waterCol = new TableColumn<>("Nước");
 		waterCol.setCellValueFactory(new PropertyValueFactory<Apartment, Integer>("water"));
 
-		TableColumn<Apartment, Integer> areaCol = new TableColumn<>("Dien tich");
+		TableColumn<Apartment, Integer> areaCol = new TableColumn<>("Diện tích");
 		areaCol.setCellValueFactory(new PropertyValueFactory<Apartment, Integer>("area"));
 
-		TableColumn<Apartment, Button> detailCol = new TableColumn<>("Chi tiet");
+		TableColumn<Apartment, Button> detailCol = new TableColumn<>("Chi tiết căn hộ");
 		detailCol.setCellValueFactory(new PropertyValueFactory<Apartment, Button>("detail"));
 
 		TableColumn<Apartment, CheckBox> selectCol = new TableColumn<>("Chọn");
@@ -158,46 +169,49 @@ public class inforScreenController implements Initializable {
 		AptTableView.getColumns().addAll(aptIDCol, ownerIDCol, vehicleCol, elecCol, waterCol, areaCol, detailCol,
 				selectCol);
 
-		TableColumn<Relationship, String> nameCol = new TableColumn<>("Ten");
+		TableColumn<Relationship, String> nameCol = new TableColumn<>("Tên");
 		nameCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("name"));
 
 		TableColumn<Relationship, String> IDCol = new TableColumn<>("ID");
 		IDCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("ID"));
 
-		TableColumn<Relationship, String> relationshipCol = new TableColumn<>("Quan he voi chu ho");
+		TableColumn<Relationship, String> relationshipCol = new TableColumn<>("Quan hệ với chủ hộ");
 		relationshipCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("relationship"));
 
 		relationshipTableView.getColumns().addAll(nameCol, IDCol, relationshipCol);
 
-		TableColumn<Vehicle, String> vehicleAptIDCol = new TableColumn<>("Can ho");
+		TableColumn<Vehicle, String> vehicleAptIDCol = new TableColumn<>("Căn hộ");
 		vehicleAptIDCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicleAptID"));
 
-		TableColumn<Vehicle, String> vehicleIDCol = new TableColumn<>("Bien so");
+		TableColumn<Vehicle, String> vehicleIDCol = new TableColumn<>("Biển số");
 		vehicleIDCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicleID"));
 
-		TableColumn<Vehicle, String> vehicleTypeCol = new TableColumn<>("Loai");
+		TableColumn<Vehicle, String> vehicleTypeCol = new TableColumn<>("Loại");
 		vehicleTypeCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("type"));
+		
+		TableColumn<Vehicle, CheckBox> vehicleDeleteCol = new TableColumn<>("Xóa");
+		vehicleDeleteCol.setCellValueFactory(new PropertyValueFactory<Vehicle, CheckBox>("select"));
 
-		vehicleTableView.getColumns().addAll(vehicleAptIDCol, vehicleIDCol, vehicleTypeCol);
+		vehicleTableView.getColumns().addAll(vehicleAptIDCol, vehicleIDCol, vehicleTypeCol, vehicleDeleteCol);
 
-		TableColumn<Relationship, String> newAptNameCol = new TableColumn<>("Ten");
+		TableColumn<Relationship, String> newAptNameCol = new TableColumn<>("Tên");
 		newAptNameCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("name"));
 
 		TableColumn<Relationship, String> newAptIDCol = new TableColumn<>("ID");
 		newAptIDCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("ID"));
 
-		TableColumn<Relationship, String> newAptRelationshipCol = new TableColumn<>("Quan he voi chu ho");
+		TableColumn<Relationship, String> newAptRelationshipCol = new TableColumn<>("Quan hệ với chủ hộ");
 		newAptRelationshipCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("relationship"));
 
 		addRelaTableView.getColumns().addAll(newAptNameCol, newAptIDCol, newAptRelationshipCol);
 
-		TableColumn<Vehicle, String> newAptVehicleAptIDCol = new TableColumn<>("Can ho");
+		TableColumn<Vehicle, String> newAptVehicleAptIDCol = new TableColumn<>("Căn hộ");
 		newAptVehicleAptIDCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicleAptID"));
 
-		TableColumn<Vehicle, String> newAptVehicleIDCol = new TableColumn<>("Bien so");
+		TableColumn<Vehicle, String> newAptVehicleIDCol = new TableColumn<>("Biển số");
 		newAptVehicleIDCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicleID"));
 
-		TableColumn<Vehicle, String> newAptVehicleTypeCol = new TableColumn<>("Loai");
+		TableColumn<Vehicle, String> newAptVehicleTypeCol = new TableColumn<>("Loại");
 		newAptVehicleTypeCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("type"));
 
 		addVehicleTableView.getColumns().addAll(newAptVehicleAptIDCol, newAptVehicleIDCol, newAptVehicleTypeCol);
@@ -211,6 +225,7 @@ public class inforScreenController implements Initializable {
 				detailPane.setDisable(false);
 				deleteButton.setVisible(false);
 				addButton.setVisible(false);
+				searchBarPane.setVisible(false);
 
 				aptIDLabel.setText(apt.getAptID());
 				ownerNameLabel.setText(findName(apt.getOwnerID()));
@@ -220,30 +235,37 @@ public class inforScreenController implements Initializable {
 				waterLabel.setText(String.valueOf(apt.getWater()));
 				areaLabel.setText(String.valueOf(apt.getArea()));
 
-				ObservableList<Relationship> aptDetailData = FXCollections.observableArrayList();
-
-				Resident res = DatabaseConnecter.getResidentByOwnerID(apt.getOwnerID());
-				for (Relationship rel : dataRela) {
-					if (res.getResidentID().equals(rel.getOwnerID())) {
-						rel.setName(DatabaseConnecter.getResidentNameById(rel.getID()));
-						aptDetailData.add(rel);
-					}
-				}
-
-				relationshipTableView.setItems(aptDetailData);
-				relationshipTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-				ObservableList<Vehicle> vehicleDetailData = FXCollections.observableArrayList();
-				for (Vehicle vehicle : dataVehicle) {
-					if (apt.getAptID().equals(vehicle.getVehicleAptID())) {
-						vehicleDetailData.add(vehicle);
-					}
-				}
-
-				vehicleTableView.setItems(vehicleDetailData);
-				vehicleTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//				ObservableList<Relationship> aptDetailData = FXCollections.observableArrayList();
+//
+//				Resident res = DatabaseConnecter.getResidentByOwnerID(apt.getOwnerID());
+//				for (Relationship rel : dataRela) {
+//					if (res.getResidentID().equals(rel.getOwnerID())) {
+//						rel.setName(DatabaseConnecter.getResidentNameById(rel.getID()));
+//						aptDetailData.add(rel);
+//					}
+//				}
+//
+//				relationshipTableView.setItems(aptDetailData);
+//				relationshipTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//
+//				ObservableList<Vehicle> vehicleDetailData = FXCollections.observableArrayList();
+//				for (Vehicle vehicle : dataVehicle) {
+//					if (apt.getAptID().equals(vehicle.getVehicleAptID())) {
+//						vehicleDetailData.add(vehicle);
+//					}
+//				}
+//				vehicleTableView.setItems(vehicleDetailData);
+//		        vehicleTableView.refresh();
+//		        vehicleTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		        
+				populateRelationshipTable(usingApt.getOwnerID());
+				populateVehicleTable(usingApt.getAptID());
+				
+				
+				
+				
+				
 			});
-
 		}
 
 		FilteredList<Apartment> filterData = new FilteredList<Apartment>(dataApt, b -> true);
@@ -276,21 +298,70 @@ public class inforScreenController implements Initializable {
 		AptTableView.setItems(sortedData);
 		AptTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		typeVehicle.getItems().addAll("Xe may", "O to");
+		typeVehicle.getItems().addAll("Xe máy", "Ô tô");
+		typeVehicleInDetailScreen.getItems().addAll("Xe máy", "Ô tô");
 		typeVehicle.setOnAction(this::select);
+		typeVehicleInDetailScreen.setOnAction(this::selectInDetailScreen);
 		
 		DatabaseConnecter.updateVehicleCountForApartments();
 	}
 
-	public void deleteSelectedRow(ActionEvent e) {
+	public void deleteAptSelectedRow(ActionEvent e) {
+		ObservableList<Apartment> aptRemove = FXCollections.observableArrayList();
 		for (Apartment apt : dataApt) {
 			if (apt.getSelect().isSelected()) {
-				if (DatabaseConnecter.deleteApartmentById(apt.getAptID())) {
-					dataApt.remove(apt);
-				}
+				DatabaseConnecter.deleteApartmentById(apt.getAptID());
+				aptRemove.add(apt);
+				System.out.println("xoa can ho "+apt.getAptID());
 			}
 		}
+		dataApt.removeAll(aptRemove);
+		AptTableView.setItems(dataApt);
+		dataApt = DatabaseConnecter.getApartmentsData();
 	}
+	
+	private void populateRelationshipTable(String ownerId) {
+	    ObservableList<Relationship> aptDetailData = FXCollections.observableArrayList();
+	    Resident res = DatabaseConnecter.getResidentByOwnerID(ownerId);
+	    if (res != null) {
+	        for (Relationship rel : dataRela) {
+	            if (res.getResidentID().equals(rel.getOwnerID())) {
+	                rel.setName(DatabaseConnecter.getResidentNameById(rel.getID()));
+	                aptDetailData.add(rel);
+	            }
+	        }
+	    }
+	    relationshipTableView.setItems(aptDetailData);
+	    relationshipTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	}
+
+	private void populateVehicleTable(String aptId) {
+	    ObservableList<Vehicle> vehicleDetailData = FXCollections.observableArrayList();
+	    for (Vehicle vehicle : dataVehicle) {
+	        if (aptId.equals(vehicle.getVehicleAptID())) {
+	            vehicleDetailData.add(vehicle);
+	        }
+	    }
+	    vehicleTableView.setItems(vehicleDetailData);
+	    vehicleTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	}
+
+	public void deleteVehicle(ActionEvent e) {
+		ObservableList<Vehicle> vehicleDetailData = FXCollections.observableArrayList();
+		vehicleDetailData = vehicleTableView.getItems();
+		ObservableList<Vehicle> vehicleRemove = FXCollections.observableArrayList();
+	    for(Vehicle vehicle : vehicleDetailData) {
+	    	if(vehicle.getSelect().isSelected()) {
+	    		vehicleRemove.add(vehicle);
+	    		DatabaseConnecter.deleteVehicle(vehicle.getVehicleID());
+	    	}
+	    }
+	    vehicleDetailData.removeAll(vehicleRemove);
+	    vehicleTableView.setItems(vehicleDetailData);
+	    vehicleTableView.refresh();
+	    dataVehicle = DatabaseConnecter.getVehiclesData();
+	}
+
 
 	public void Logout(ActionEvent e) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
@@ -307,6 +378,7 @@ public class inforScreenController implements Initializable {
 		AptTableView.setVisible(false);
 		AptTableView.setDisable(true);
 		deleteButton.setVisible(false);
+		searchBarPane.setVisible(false);
 		addButton.setVisible(false);
 		addAptPane.setVisible(true);
 		addAptPane.setDisable(false);
@@ -351,6 +423,10 @@ public class inforScreenController implements Initializable {
 
 	public void select(ActionEvent e) {
 		currentChoice = typeVehicle.getValue();
+	}
+	
+	public void selectInDetailScreen(ActionEvent e) {
+		currentChoice = typeVehicleInDetailScreen.getValue();
 	}
 
 	public void confirmAddRelaForNewApt() {
@@ -398,9 +474,16 @@ public class inforScreenController implements Initializable {
 	public void addRelaInDetailScreen(ActionEvent e) {
 		addRelaPane.setVisible(true);
 		addRelaPane.setDisable(false);
+		addVehiclePane.setVisible(false);
+	}
+	
+	public void addVehicleInDetailScreen(ActionEvent e) {
+		addVehiclePane.setVisible(true);
+		addRelaPane.setVisible(false);
 	}
 
 	public void refreshAddRela(ActionEvent e) {
+		dataRela = DatabaseConnecter.getRelationshipsData();
 		ObservableList<Relationship> newRela = FXCollections.observableArrayList();
 		Resident res = DatabaseConnecter.getResidentByOwnerID(usingApt.getOwnerID());
 		for (Relationship rel : dataRela) {
@@ -415,6 +498,7 @@ public class inforScreenController implements Initializable {
 	}
 
 	public void refreshAddVehicle(ActionEvent e) {
+		dataVehicle = DatabaseConnecter.getVehiclesData();
 		ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
 		for (Vehicle vehicle : dataVehicle) {
 			if (usingApt.getAptID().equals(vehicle.getVehicleAptID())) {
@@ -426,7 +510,7 @@ public class inforScreenController implements Initializable {
 		addVehicleTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 
-	public void confirmInDetailScreen(ActionEvent e) {
+	public void confirmAddRelaInDetailScreen(ActionEvent e) {
 		if (addName.getText().isEmpty() || addID.getText().isEmpty() || addRela.getText().isEmpty()) {
 			return;
 		}
@@ -440,9 +524,9 @@ public class inforScreenController implements Initializable {
 			dataResident.add(newRes);
 		}
 		
-		Relationship newRela = new Relationship(usingApt.getOwnerID(), ID, rela);
+		Relationship newRela = new Relationship(ID, usingApt.getOwnerID(), rela);
 		
-		if(DatabaseConnecter.insertRelationship(usingApt.getOwnerID(), ID, rela)) {
+		if(DatabaseConnecter.insertRelationship(ID, usingApt.getOwnerID(), rela)) {
 			dataRela.add(newRela);
 		}
 
@@ -453,13 +537,26 @@ public class inforScreenController implements Initializable {
 		addID.clear();
 		addRela.clear();
 	}
+	
+	public void confirmAddVehicleInDetailScreen(ActionEvent e) {
+		if (addVehicleText.getText().isEmpty()) {
+			return;
+		}
+		String newVehicleID = addVehicleText.getText();
+		Vehicle newVehicle = new Vehicle(usingApt.getAptID(), newVehicleID, currentChoice);
+		
+		if(DatabaseConnecter.insertVehicle(newVehicleID, usingApt.getAptID(), currentChoice)) {
+			dataVehicle.add(newVehicle);
+		}
+		
+		addVehicleText.clear();
+		DatabaseConnecter.updateVehicleCountForApartments();
+		
+	}
 
 	public void refresh(ActionEvent e) {
-		aptIDLabel.setText(usingApt.getAptID());
-		ownerNameLabel.setText(findName(usingApt.getOwnerID()));
-		ownerIDLabel.setText(usingApt.getOwnerID());
-		phoneLabel.setText(findPhone(usingApt.getOwnerID()));
-
+		
+		dataRela = DatabaseConnecter.getRelationshipsData();
 		ObservableList<Relationship> aptDetailData = FXCollections.observableArrayList();
 
 		Resident res = DatabaseConnecter.getResidentByOwnerID(usingApt.getOwnerID());
@@ -471,10 +568,25 @@ public class inforScreenController implements Initializable {
 		}
 
 		relationshipTableView.setItems(aptDetailData);
+		relationshipTableView.refresh();
 		relationshipTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+	}
+	
+	public void refreshVehicle(ActionEvent e) {
+		dataVehicle = DatabaseConnecter.getVehiclesData();
+		ObservableList<Vehicle> vehicleData = FXCollections.observableArrayList();
+		for (Vehicle vehicle : dataVehicle) {
+			if (usingApt.getAptID().equals(vehicle.getVehicleAptID())) {
+				vehicleData.add(vehicle);
+			}
+		}
+
+		vehicleTableView.setItems(vehicleData);
+		vehicleTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 	}
 
 	public void back(ActionEvent e) throws IOException {
+		currentChoice = null;
 		Parent root = FXMLLoader.load(getClass().getResource("InformationScreen.fxml"));
 		stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 		scene = new Scene(root);

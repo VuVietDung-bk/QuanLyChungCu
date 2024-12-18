@@ -1,14 +1,19 @@
 package application;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+
 public class Vehicle {
 	private String vehicleID;
 	private String vehicleAptID;
 	private String type;
+	private CheckBox select;
 	
 	public Vehicle(String vehicleAptID, String vehicleID, String type) {
 		this.vehicleAptID = vehicleAptID;
 		this.vehicleID = vehicleID;
 		this.type = type;
+		this.select = new CheckBox();
 	}
 	
 	public String getVehicleID() {
@@ -29,6 +34,13 @@ public class Vehicle {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
+	public CheckBox getSelect() {
+		return select;
+	}
+
+	public void setSelect(CheckBox select) {
+		this.select = select;
+	}
 	
 }
