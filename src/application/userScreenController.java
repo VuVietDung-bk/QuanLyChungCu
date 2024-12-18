@@ -94,58 +94,58 @@ public class userScreenController implements Initializable {
     	
     	dataFee = DatabaseConnecter.getAllFees();
     	
-    	TableColumn<Vehicle, String> vehicleAptIDCol = new TableColumn<>("Can ho");
+    	TableColumn<Vehicle, String> vehicleAptIDCol = new TableColumn<>("Căn hộ");
         vehicleAptIDCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicleAptID"));
         
-        TableColumn<Vehicle, String> vehicleIDCol = new TableColumn<>("Bien so");
+        TableColumn<Vehicle, String> vehicleIDCol = new TableColumn<>("Biển số");
         vehicleIDCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicleID"));
         
-        TableColumn<Vehicle, String> vehicleTypeCol = new TableColumn<>("Loai");
+        TableColumn<Vehicle, String> vehicleTypeCol = new TableColumn<>("Loại");
         vehicleTypeCol.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("type"));
         
         userVehicleTableView.getColumns().addAll(vehicleAptIDCol, vehicleIDCol, vehicleTypeCol);
     	
-        TableColumn<Relationship, String> nameCol = new TableColumn<>("Ten");
+        TableColumn<Relationship, String> nameCol = new TableColumn<>("Tên");
         nameCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("name"));
         
         TableColumn<Relationship, String> IDCol = new TableColumn<>("ID");
         IDCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("ID"));
         
-        TableColumn<Relationship, String> relationshipCol = new TableColumn<>("Quan he voi chu ho");
+        TableColumn<Relationship, String> relationshipCol = new TableColumn<>("Quan hệ với chủ hộ");
         relationshipCol.setCellValueFactory(new PropertyValueFactory<Relationship, String>("relationship"));
         
         userRelaTableView.getColumns().addAll(nameCol, IDCol, relationshipCol);
         
-        TableColumn<Fee, String> aptIDCol = new TableColumn<>("Can ho");
+        TableColumn<Fee, String> aptIDCol = new TableColumn<>("Căn hộ");
 		aptIDCol.setCellValueFactory(new PropertyValueFactory<Fee, String>("aptID"));
 		
-		TableColumn<Fee, String> typeFeeCol = new TableColumn<>("Loai phi");
+		TableColumn<Fee, String> typeFeeCol = new TableColumn<>("Loại phí");
 		typeFeeCol.setCellValueFactory(new PropertyValueFactory<Fee, String>("typeFee"));
 		
-		TableColumn<Fee, String> isForcedCol = new TableColumn<>("Bat buoc");
+		TableColumn<Fee, String> isForcedCol = new TableColumn<>("Bắt buộc");
 		isForcedCol.setCellValueFactory(new PropertyValueFactory<Fee, String>("isForced"));
 		
-		TableColumn<Fee, Integer> amountCol = new TableColumn<>("So tien");
+		TableColumn<Fee, Integer> amountCol = new TableColumn<>("Số tiền");
 		amountCol.setCellValueFactory(new PropertyValueFactory<Fee, Integer>("amount"));
 		
-		TableColumn<Fee, String> statusCol = new TableColumn<>("Tinh trang");
+		TableColumn<Fee, String> statusCol = new TableColumn<>("Tình trạng");
 		statusCol.setCellValueFactory(new PropertyValueFactory<Fee, String>("status"));
 		
-		TableColumn<Fee, CheckBox> checkCol = new TableColumn<>("Thanh toan");
+		TableColumn<Fee, CheckBox> checkCol = new TableColumn<>("Thanh toán");
 		checkCol.setCellValueFactory(new PropertyValueFactory<Fee, CheckBox>("check"));
 		
 		userFeeTableView.getColumns().addAll(aptIDCol, typeFeeCol, isForcedCol, amountCol, statusCol, checkCol);
     	
 		userAptID.setText(findApt(userAcc.getAccountOwnerID()).getAptID());
-		userOwnerName.setText("Ten chu can ho: "+findName(findApt(userAcc.getAccountOwnerID()).getOwnerID()));
-		userOwnerID.setText("CCCD chu can ho: "+findApt(userAcc.getAccountOwnerID()).getOwnerID());
-		userOwnerPhone.setText("So dien thoai: "+ findPhone(findApt(userAcc.getAccountOwnerID()).getOwnerID()));
-		userArea.setText("Dien tich can ho: "+ findApt(userAcc.getAccountOwnerID()).getArea());
-		userElec.setText("So dien: "+findApt(userAcc.getAccountOwnerID()).getElec());
-		userWater.setText("So nuoc: "+findApt(userAcc.getAccountOwnerID()).getWater());
-		userAccName.setText("Ten chu tai khoan: "+findName(userAcc.getAccountOwnerID()));
+		userOwnerName.setText("Tên chủ hộ: "+findName(findApt(userAcc.getAccountOwnerID()).getOwnerID()));
+		userOwnerID.setText("CCCD chủ hộ: "+findApt(userAcc.getAccountOwnerID()).getOwnerID());
+		userOwnerPhone.setText("Số điện thoại: "+ findPhone(findApt(userAcc.getAccountOwnerID()).getOwnerID()));
+		userArea.setText("Diện tích: "+ findApt(userAcc.getAccountOwnerID()).getArea());
+		userElec.setText("Số điện: "+findApt(userAcc.getAccountOwnerID()).getElec());
+		userWater.setText("Số nước: "+findApt(userAcc.getAccountOwnerID()).getWater());
+		userAccName.setText("Tên chủ tài khoản: "+findName(userAcc.getAccountOwnerID()));
 		userAccID.setText("CCCD: "+userAcc.getAccountOwnerID());
-		userAccPhone.setText("So dien thoai: "+ findPhone(userAcc.getAccountOwnerID()));
+		userAccPhone.setText("Số điện thoại: "+ findPhone(userAcc.getAccountOwnerID()));
 		
 		ObservableList<Vehicle> userAptVehicleData = FXCollections.observableArrayList();
         for (Vehicle vehicle : dataVehicle) {
@@ -196,26 +196,26 @@ public class userScreenController implements Initializable {
 			String newPass = userNewPassText.getText();
 			String confirmNewPass = userConfirmNewPassText.getText();
 			if(userCurPassText.getText().isEmpty() || userNewPassText.getText().isEmpty() || userConfirmNewPassText.getText().isEmpty()) {
-				userResetPassNote.setText("Vui long nhap day du cac dong!!!");
+				userResetPassNote.setText("Vui lòng nhập đầy đủ các dòng!!!");
 				userResetPassNote.setVisible(true);
 				return;
 			}
 			if(!currentPass.equals(userAcc.getAccountPassword())) {
-				userResetPassNote.setText("Sai mat khau hien tai!!!");
+				userResetPassNote.setText("Sai mật khẩu hiện tại!!!");
 				userResetPassNote.setVisible(true);
 				return;
 			}
 			if(!newPass.equals(confirmNewPass)) {
-				userResetPassNote.setText("Mat khau khong trung khop!!!");
+				userResetPassNote.setText("Mật khẩu không trùng khớp!!!");
 				userResetPassNote.setVisible(true);
 				return;
 			}
 			if(newPass.equals(currentPass)) {
-				userResetPassNote.setText("Vui long nhap mat khau moi!");
+				userResetPassNote.setText("Vui lòng nhập mật khẩu mới!!!");
 				userResetPassNote.setVisible(true);
 				return;
 			}
-			userResetPassNote.setText("Doi mat khau thanh cong!");
+			userResetPassNote.setText("Đổi mật khẩu thành công!");
 			userResetPassNote.setVisible(true);
 			userAcc.setAccountPassword(newPass);
 		});

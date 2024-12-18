@@ -1,6 +1,7 @@
 package application;
 
 import javafx.collections.ObservableList;
+import javafx.scene.control.CheckBox;
 
 public class Relationship {
 	private String ownerID;
