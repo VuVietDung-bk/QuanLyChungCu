@@ -20,6 +20,7 @@ public class Account {
 	}
 	public void setAccountUsername(String accountUsername) {
 		this.accountUsername = accountUsername;
+		DatabaseConnecter.setUsername(accountOwnerID, accountUsername);
 	}
 	public String getAccountPassword() {
 		return accountPassword;

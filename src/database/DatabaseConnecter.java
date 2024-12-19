@@ -125,6 +125,55 @@ public class DatabaseConnecter {
         }
         return false;
     }
+    
+    public static boolean setUsername(String id, String newUsername) {
+        Connection connection = null;
+        PreparedStatement checkStatement = null;
+        PreparedStatement updateStatement = null;
+
+        try {
+            connection = DatabaseConnecter.getConnection();
+
+            if (connection != null) {
+                // Check if the username already exists
+                String checkQuery = "SELECT COUNT(*) FROM account WHERE username = ?";
+                checkStatement = connection.prepareStatement(checkQuery);
+                checkStatement.setString(1, newUsername.trim());
+                ResultSet resultSet = checkStatement.executeQuery();
+
+                if (resultSet.next() && resultSet.getInt(1) > 0) {
+                    // Username is already in use
+                    return false;
+                }
+
+                // Update the username
+                String updateQuery = "UPDATE account SET username = ? WHERE residentID = ?";
+                updateStatement = connection.prepareStatement(updateQuery);
+                updateStatement.setString(1, newUsername.trim());
+                updateStatement.setString(2, id);
+
+                int affectedRows = updateStatement.executeUpdate();
+
+                return affectedRows > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return false;
+        } catch (DatabaseConnecter.DatabaseConnectionException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (checkStatement != null) checkStatement.close();
+                if (updateStatement != null) updateStatement.close();
+                if (connection != null) DatabaseConnecter.closeConnection(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
 	
     public static ObservableList<Resident> getResidentsData() {
         String query = "SELECT id, name, phone FROM Resident";
