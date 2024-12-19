@@ -1,5 +1,7 @@
 package application;
 
+import java.sql.Date;
+
 import javafx.scene.control.CheckBox;
 
 public class Fee {
@@ -9,23 +11,29 @@ public class Fee {
 	String status;
 	int amount;
 	CheckBox check;
+	Date fromDate;
+	Date toDate;
 	
-	public Fee(String aptID, String typeFee, String isForced, int amount) {
+	public Fee(String aptID, String typeFee, String isForced, int amount, Date fromDate, Date toDate) {
 		this.aptID = aptID;
 		this.typeFee = typeFee;
 		this.isForced = isForced;
 		this.amount = amount;
 		this.status = "Chua thanh toan";
 		this.check = new CheckBox();
+		this.fromDate = fromDate;
+		this.toDate = toDate;
 	}
 	
-	public Fee(String aptID, String typeFee, String isForced, String status, int amount) {
+	public Fee(String aptID, String typeFee, String isForced, String status, int amount, Date fromDate, Date toDate) {
 		this.aptID = aptID;
 		this.typeFee = typeFee;
 		this.isForced = isForced;
 		this.amount = amount;
 		this.status = status;
 		this.check = new CheckBox();
+		this.fromDate = fromDate;
+		this.toDate = toDate;
 	}
 	
 	public String getAptID() {

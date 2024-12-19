@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.accountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.accountController">
    <children>
-      <ImageView fx:id="Image" fitHeight="96.0" fitWidth="1280.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Image" fitHeight="96.0" fitWidth="1280.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/banner.png" />
          </image></ImageView>
@@ -19,28 +19,28 @@
          <items>
             <AnchorPane maxWidth="250.0" minHeight="620.0" minWidth="150.0" prefHeight="620.0" prefWidth="250.0" style="-fx-background-color: #e6ffff;">
                <children>
-                  <Button layoutY="2.0" mnemonicParsing="false" onAction="#switchToInfoScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thong tin can ho" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Button layoutY="50.0" mnemonicParsing="false" onAction="#switchToFeeScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thu phi" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-                  <Button layoutY="101.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quan ly cac khoan thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                  <Button layoutY="570.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #d0eeff;" text="Quan ly tai khoan" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="570.0" />
+                  <Button layoutY="2.0" mnemonicParsing="false" onAction="#switchToInfoScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thông tin căn hộ" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutY="50.0" mnemonicParsing="false" onAction="#switchToFeeScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thu phí" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                  <Button layoutY="101.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quản lý các khoản thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                  <Button layoutY="570.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #d0eeff;" text="Quản lý tài khoản" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="570.0" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e6ffff;">
                <children>
-                  <Label fx:id="accountOwnerName" layoutX="421.0" layoutY="46.0" prefHeight="30.0" prefWidth="200.0" text="Ten chu tai khoan:" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="60.0" />
-                  <Label fx:id="accountOwnerID" layoutX="421.0" layoutY="96.0" prefHeight="30.0" prefWidth="200.0" text="So CCCD: " AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="100.0" />
-                  <Label fx:id="accountType" layoutX="428.0" layoutY="162.0" prefHeight="30.0" prefWidth="200.0" text="Loai tai khoan:" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
-                  <Button layoutX="456.0" layoutY="232.0" mnemonicParsing="false" onAction="#resetPassword" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #d0eeff;" text="Doi mat khau" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0" />
-                  <Label fx:id="accountOwnerPhone" layoutX="428.0" layoutY="127.0" prefHeight="30.0" prefWidth="200.0" text="So dien thoai: " AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="140.0" />
+                  <Label fx:id="accountOwnerName" layoutX="421.0" layoutY="46.0" prefHeight="30.0" prefWidth="200.0" text="Tên chủ tài khoản:" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="60.0" />
+                  <Label fx:id="accountOwnerID" layoutX="421.0" layoutY="96.0" prefHeight="30.0" prefWidth="200.0" text="Số CCCD:" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="100.0" />
+                  <Label fx:id="accountType" layoutX="428.0" layoutY="162.0" prefHeight="30.0" prefWidth="200.0" text="Loại tài khoản" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="180.0" />
+                  <Button layoutX="456.0" layoutY="232.0" mnemonicParsing="false" onAction="#resetPassword" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #d0eeff;" text="Đổi mật khẩu" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="220.0" />
+                  <Label fx:id="accountOwnerPhone" layoutX="428.0" layoutY="127.0" prefHeight="30.0" prefWidth="200.0" text="Số điện thoại:" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="140.0" />
                   <Pane fx:id="resetPasswordPane" layoutX="400.0" layoutY="280.0" visible="false">
                      <children>
-                        <Label prefHeight="30.0" prefWidth="130.0" text="Mat khau hien tai" />
+                        <Label prefHeight="30.0" prefWidth="130.0" text="Mật khẩu hiện tại" />
                         <TextField fx:id="currentPassText" layoutX="130.4000244140625" prefHeight="30.0" prefWidth="150.0" />
-                        <Label layoutY="40.0" prefHeight="30.0" prefWidth="130.0" text="Mat khau moi" />
+                        <Label layoutY="40.0" prefHeight="30.0" prefWidth="130.0" text="Mật khẩu mới" />
                         <TextField fx:id="newPassText" layoutX="130.4000244140625" layoutY="40.0" prefHeight="30.0" prefWidth="150.0" />
-                        <Label layoutY="80.0" prefHeight="30.0" prefWidth="130.0" text="Nhap lai mat khau moi" />
+                        <Label layoutY="80.0" prefHeight="30.0" prefWidth="130.0" text="Nhập lại mật khẩu" />
                         <TextField fx:id="confirmNewPassText" layoutX="130.4000244140625" layoutY="80.0" prefHeight="30.0" prefWidth="150.0" />
-                        <Button fx:id="confirmButton" layoutX="110.39999389648438" layoutY="160.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Xac nhan" />
+                        <Button fx:id="confirmButton" layoutX="110.39999389648438" layoutY="160.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Xác nhận" />
                         <Label fx:id="note" layoutY="120.0" prefHeight="30.0" prefWidth="300.0" text="Label" visible="false" />
                      </children>
                   </Pane>
@@ -48,7 +48,7 @@
             </AnchorPane>
          </items>
       </SplitPane>
-      <Button layoutX="1228.0" layoutY="2.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Dang xuat" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
-      <Label layoutX="1156.0" layoutY="31.0" prefHeight="30.0" prefWidth="130.0" text="Loai tai khoan: Admin" AnchorPane.rightAnchor="-6.400000000000091" AnchorPane.topAnchor="31.0" />
+      <Button layoutX="1228.0" layoutY="2.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Đăng xuất" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="1.0" />
+      <Label layoutX="1156.0" layoutY="31.0" prefHeight="30.0" prefWidth="130.0" text="Loại tài khoản: Admin" AnchorPane.rightAnchor="-6.400000000000091" AnchorPane.topAnchor="31.0" />
    </children>
 </AnchorPane>

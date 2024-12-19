@@ -2,6 +2,8 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import database.DatabaseConnecter;
@@ -272,9 +274,9 @@ public class feeScreenController implements Initializable {
 		}else {
 			typeFee = detail;
 		}
-		Fee newFee = new Fee(usingApt.getAptID(), typeFee, isForced, amount);
+		Fee newFee = new Fee(usingApt.getAptID(), typeFee, isForced, amount, Date.valueOf(LocalDate.now()), null);
 		int forced = isForced.equals("Bat buoc")? 1 : 0;
-		if(DatabaseConnecter.insertFee(usingApt.getAptID(), typeFee, forced, 0, amount)) {
+		if(DatabaseConnecter.insertFee(usingApt.getAptID(), typeFee, forced, 0, amount, Date.valueOf(LocalDate.now()), null)) {
 			dataFee.add(newFee);
 		}
 		

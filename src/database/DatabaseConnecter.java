@@ -291,11 +291,13 @@ public class DatabaseConnecter {
                 int isForced = resultSet.getInt("isForced");
                 int status = resultSet.getInt("status");
                 int amount = resultSet.getInt("amount");
-                
-                String isForcedText = isForced == 1? "Bat buoc" : "Khong bat buoc";
-                String statusText = status == 1? "Da thanh toan" : "Chua thanh toan";
+                Date fromDate = resultSet.getDate("fromDate");
+                Date toDate = resultSet.getDate("toDate");
 
-                Fee fee = new Fee(apartmentID, typeFee, isForcedText, statusText, amount);
+                String isForcedText = isForced == 1 ? "Bắt buộc" : "Không bắt buộc";
+                String statusText = status == 1 ? "Đã thanh toán" : status == 2 ? "Quá hạn" : "Chưa thanh toán";
+
+                Fee fee = new Fee(apartmentID, typeFee, isForcedText, statusText, amount, fromDate, toDate);
                 feeList.add(fee);
             }
 
@@ -309,6 +311,7 @@ public class DatabaseConnecter {
 
         return feeList;
     }
+
     
     public static Resident getResidentByOwnerID(String ownerID) {
         String query = "SELECT Resident.id, Resident.name, Resident.phone " +
@@ -385,7 +388,7 @@ public class DatabaseConnecter {
 
         try {
             connection = getConnection();
-            connection.setAutoCommit(false); // Enable transaction management
+            connection.setAutoCommit(false);
 
             // Step 1: Retrieve the ownerID of the apartment
             String ownerID = null;
@@ -468,7 +471,38 @@ public class DatabaseConnecter {
         return isDeleted;
     }
 
+    public static boolean deleteResident(String residentID) {
+        String query = "DELETE FROM Resident WHERE id = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        boolean isDeleted = false;
 
+        try {
+            connection = getConnection(); 
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, residentID);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            isDeleted = rowsAffected > 0;
+
+        } catch (SQLException | DatabaseConnectionException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isDeleted;
+    }
     
     public static boolean deleteFee(String apartmentID, String typeFee, int isForced, int status, int amount) {
         String query = "DELETE FROM Fee WHERE apartmentID = ? AND typeFee = ? AND isForced = ? AND status = ? AND amount = ?";
@@ -513,13 +547,11 @@ public class DatabaseConnecter {
         boolean isDeleted = false;
 
         try {
-            connection = getConnection(); // Get the database connection
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
 
-            // Set the parameter for the querys
             preparedStatement.setString(1, vehicleID);
 
-            // Execute the delete query
             int rowsAffected = preparedStatement.executeUpdate();
             isDeleted = rowsAffected > 0;
 
@@ -681,8 +713,8 @@ public class DatabaseConnecter {
         return isInserted;
     }
     
-    public static boolean insertFee(String apartmentID, String typeFee, int isForced, int status, int amount) {
-        String query = "INSERT INTO Fee (apartmentID, typeFee, isForced, status, amount) VALUES (?, ?, ?, ?, ?)";
+    public static boolean insertFee(String apartmentID, String typeFee, int isForced, int status, int amount, Date fromDate, Date toDate) {
+        String query = "INSERT INTO Fee (apartmentID, typeFee, isForced, status, amount, fromDate, toDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -696,6 +728,8 @@ public class DatabaseConnecter {
             preparedStatement.setInt(3, isForced);
             preparedStatement.setInt(4, status);
             preparedStatement.setInt(5, amount);
+            preparedStatement.setDate(6, fromDate); 
+            preparedStatement.setDate(7, toDate);  
 
             int rowsAffected = preparedStatement.executeUpdate();
 
@@ -787,4 +821,36 @@ public class DatabaseConnecter {
 
         return isUpdated;
     }
+    
+    public static int updateExpiredFees() {
+        String query = "UPDATE Fee SET status = 2 WHERE toDate < CURRENT_DATE AND status != 2";
+
+        Connection connection = null;
+        Statement statement = null;
+        int rowsAffected = 0;
+
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+
+            rowsAffected = statement.executeUpdate(query);
+
+        } catch (SQLException | DatabaseConnectionException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return rowsAffected;
+    }
+
 }
