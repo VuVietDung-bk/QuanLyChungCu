@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.userScreenController">
+   <children>
+      <SplitPane dividerPositions="0.1980600750938673" layoutY="100.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+        <items>
+          <AnchorPane maxWidth="250.0" minWidth="150.0" prefWidth="250.0" style="-fx-background-color: #e6ffff;">
+               <children>
+                  <Button layoutY="2.0" mnemonicParsing="false" onAction="#infoScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thông tin căn hộ" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Button layoutX="99.0" layoutY="50.0" mnemonicParsing="false" onAction="#accountScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quản lý tài khoản" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e6ffff;">
+               <children>
+                  <Pane fx:id="userAptInfoPane" layoutX="60.0" layoutY="60.0" style="-fx-background-color: #e6ffff;">
+                     <children>
+                        <Label fx:id="userAptID" prefHeight="30.0" prefWidth="100.0" text="Can ho: " />
+                        <Label fx:id="userOwnerName" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" text="Chu ho: " />
+                        <Label fx:id="userOwnerID" layoutY="70.0" prefHeight="30.0" prefWidth="200.0" text="CCCD:" />
+                        <Label fx:id="userOwnerPhone" layoutY="105.0" prefHeight="30.0" prefWidth="200.0" text="So dien thoai: " />
+                        <Label fx:id="userArea" layoutY="140.0" prefHeight="30.0" prefWidth="200.0" text="Dien tich" />
+                        <Label fx:id="userElec" layoutY="175.0" prefHeight="30.0" prefWidth="200.0" text="So dien:" />
+                        <Label fx:id="userWater" layoutY="210.0" prefHeight="30.0" prefWidth="200.0" text="So nuoc: " />
+                        <Label layoutY="245.0" prefHeight="30.0" prefWidth="200.0" text="Phương tiện đã đăng ký" />
+                        <TableView fx:id="userVehicleTableView" layoutY="280.0" prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #e6ffff;" />
+                        <Label layoutX="420.0" prefHeight="30.0" prefWidth="200.0" text="Thành viên trong căn hộ" />
+                        <TableView fx:id="userRelaTableView" layoutX="420.0" layoutY="30.0" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #e6ffff;" />
+                        <Label layoutX="420.0" layoutY="230.0" prefHeight="30.0" prefWidth="200.0" text="Thông tin các khoản phí" />
+                        <TableView fx:id="userFeeTableView" layoutX="420.0" layoutY="260.0" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #e6ffff;" />
+                        <Button fx:id="payButton" layoutX="640.0" layoutY="490.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #d0eeff;" text="Thanh toán" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="userAccountPane" layoutX="400.0" layoutY="100.0" visible="false">
+                     <children>
+                        <Label fx:id="userAccName" prefHeight="30.0" prefWidth="250.0" text="Chu tai khoan:" />
+                        <Label fx:id="userAccID" layoutY="35.0" prefHeight="30.0" prefWidth="250.0" text="CCCD:" />
+                        <Label fx:id="userAccPhone" layoutY="70.0" prefHeight="30.0" prefWidth="250.0" text="So dien thoai:" />
+                        <Button layoutX="80.0" layoutY="110.0" mnemonicParsing="false" onAction="#resetPass" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Đổi mật khẩu" />
+                        <Pane fx:id="resetPassPane" layoutY="160.0" visible="false">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="130.0" text="Mật khẩu hiện tại:" />
+                              <PasswordField fx:id="userCurPassText" layoutX="130.0" prefHeight="30.0" prefWidth="150.0" />
+                              <Label layoutY="35.0" prefHeight="30.0" prefWidth="130.0" text="Mật khẩu mới:" />
+                              <PasswordField fx:id="userNewPassText" layoutX="130.0" layoutY="35.0" prefHeight="30.0" prefWidth="150.0" />
+                              <Label layoutY="70.0" prefHeight="30.0" prefWidth="130.0" text="Xác nhận mật khẩu mới:" />
+                              <PasswordField fx:id="userConfirmNewPassText" layoutX="130.0" layoutY="70.0" prefHeight="30.0" prefWidth="150.0" />
+                              <Button fx:id="confirmButton" layoutX="105.0" layoutY="140.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #d0eeff;" text="Xác nhận:" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <ImageView fitHeight="96.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banner.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1228.0" layoutY="1.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #d0eeff;" text="Đăng xuất" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+      <Label fx:id="typeAccountLabel" layoutX="1155.0" layoutY="31.0" prefHeight="30.0" prefWidth="130.0" text="Loại tài khoản: Cư dân" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0" />
+   </children>
+</AnchorPane>

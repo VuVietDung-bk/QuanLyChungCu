@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.feeScreenController">
+   <children>
+      <SplitPane dividerPositions="0.1980600750938673" layoutX="6.0" layoutY="81.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+        <items>
+          <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="150.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e6ffff;">
+               <children>
+                  <Button layoutX="99.0" layoutY="2.0" mnemonicParsing="false" onAction="#switchToInfoScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thông tin căn hộ" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button layoutX="99.0" layoutY="50.0" mnemonicParsing="false" onAction="#back" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Thu phí" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button layoutX="99.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToFeeManagementScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quản lý các khoản thu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="104.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button layoutX="99.0" layoutY="537.0" mnemonicParsing="false" onAction="#switchToAccountScreen" prefHeight="50.0" style="-fx-background-color: #d0eeff;" text="Quản lý tài khoản" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e6ffff;">
+               <children>
+                  <Pane fx:id="findAptPane" layoutX="393.0" layoutY="234.0">
+                     <children>
+                        <TextField fx:id="aptID" layoutX="70.0" prefHeight="30.0" prefWidth="150.0" promptText="Mời nhập mã căn hộ" />
+                        <Label prefHeight="30.0" prefWidth="70.0" text="Tìm căn hộ:" />
+                        <Button fx:id="find" layoutX="220.0" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #d0eeff;" text="Tìm">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button layoutX="70.0" layoutY="32.0" mnemonicParsing="false" onAction="#addNewFeeForAllApt" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #d0eeff;" text="Tạo khoản thu hàng loạt">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="ComputeFee" prefHeight="618.4" prefWidth="1022.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="aptIDLabel" layoutX="100.0" layoutY="67.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="100.0" layoutY="102.0" prefHeight="30.0" prefWidth="150.0" text="Tên chủ hộ" />
+                        <Label fx:id="ownerNameLabel" layoutX="100.0" layoutY="137.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="100.0" layoutY="172.0" prefHeight="30.0" prefWidth="150.0" text="Số điện thoại" />
+                        <Label fx:id="phoneLabel" layoutX="100.0" layoutY="207.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="100.0" layoutY="242.0" prefHeight="30.0" prefWidth="150.0" text="Số điện" />
+                        <Label fx:id="curElecLabel" layoutX="100.0" layoutY="277.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="100.0" layoutY="312.0" prefHeight="30.0" prefWidth="150.0" text="Số nước" />
+                        <Label fx:id="curWaterLabel" layoutX="100.0" layoutY="347.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="100.0" layoutY="382.0" prefHeight="30.0" prefWidth="150.0" text="Diện tích" />
+                        <Label fx:id="areaLabel" layoutX="100.0" layoutY="417.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="100.0" layoutY="452.0" prefHeight="30.0" prefWidth="150.0" text="Phương tiện hiện tại" />
+                        <Label fx:id="countCarLabel" layoutX="100.0" layoutY="487.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label fx:id="countMotorbikeLabel" layoutX="100.0" layoutY="522.0" prefHeight="30.0" prefWidth="150.0" text="Label" />
+                        <Label layoutX="400.0" layoutY="100.0" prefHeight="30.0" prefWidth="150.0" text="Chọn dịch vụ thu phí" />
+                        <ChoiceBox fx:id="choiceBox" layoutX="400.0" layoutY="130.0" prefHeight="30.0" prefWidth="150.0" />
+                        <Pane fx:id="feeLivingPane" layoutX="400.0" layoutY="200.0" onKeyPressed="#pressEnter" prefHeight="300.0" prefWidth="370.0" visible="false">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="100.0" text="Số điện hiện tại" />
+                              <TextField fx:id="currentElecText" layoutX="100.0" prefHeight="30.0" prefWidth="70.0" />
+                              <Label layoutX="200.0" prefHeight="30.0" prefWidth="100.0" text="Số nước hiện tại" />
+                              <TextField fx:id="currentWaterText" layoutX="300.0" prefHeight="30.0" prefWidth="70.0" />
+                              <Label fx:id="totalFeeLabel" layoutY="210.0" prefHeight="30.0" prefWidth="200.0" text="Tổng tiền" />
+                              <Label fx:id="feeElecLabel" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" text="Tiền điện" />
+                              <Label fx:id="feeWaterLabel" layoutX="200.0" layoutY="50.0" prefHeight="30.0" prefWidth="150.0" text="Tiền nước" />
+                              <Label fx:id="feeParkingLabel" layoutY="90.0" prefHeight="30.0" prefWidth="200.0" text="Tiền gửi xe" />
+                              <Label fx:id="feeServiceLabel" layoutY="130.0" prefHeight="30.0" prefWidth="200.0" text="Tiền dịch vụ" />
+                              <Label fx:id="feeManagementLabel" layoutY="170.0" prefHeight="30.0" prefWidth="200.0" text="Tiền phí quản lý chung cư" />
+                              <Button layoutX="130.0" layoutY="270.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" style="-fx-background-color: #d0eeff;" text="Gửi thông báo">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="addOtherFeePane" layoutX="400.0" layoutY="250.0" onKeyPressed="#pressEnter" prefHeight="210.0" prefWidth="350.0" visible="false">
+                           <children>
+                              <TextField fx:id="otherFeeDetail" layoutX="120.0" prefHeight="30.0" prefWidth="230.0" />
+                              <TextField fx:id="otherFeeAmount" layoutX="120.0" layoutY="40.0" prefHeight="30.0" prefWidth="230.0" />
+                              <Label fx:id="isForce" layoutY="125.0" prefHeight="30.0" prefWidth="60.0" text="Bắt buộc" />
+                              <CheckBox fx:id="isForceCheck" layoutX="60.0" layoutY="125.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                              <TextField fx:id="validDayText" layoutX="120.0" layoutY="80.0" prefHeight="30.0" prefWidth="100.0" />
+                              <Label prefHeight="30.0" prefWidth="120.0" text="Mô tả phí đóng góp" />
+                              <Label layoutY="40.0" prefHeight="30.0" prefWidth="120.0" text="Tiền đóng góp" />
+                              <Label layoutY="80.0" prefHeight="30.0" prefWidth="120.0" text="Thời hạn đóng" />
+                              <Button layoutX="120.0" layoutY="180.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Gửi thông báo">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="addForAllApt" layoutX="346.0" layoutY="160.0" onKeyPressed="#pressEnter" prefHeight="210.0" prefWidth="350.0" visible="false">
+                     <children>
+                        <TextField fx:id="addAllDetail" layoutX="120.0" prefHeight="30.0" prefWidth="230.0" />
+                        <TextField fx:id="addAllAmount" layoutX="120.0" layoutY="40.0" prefHeight="30.0" prefWidth="230.0" />
+                        <Label fx:id="isForce1" layoutY="125.0" prefHeight="30.0" prefWidth="60.0" text="Bắt buộc" />
+                        <CheckBox fx:id="addAllCheck" layoutX="60.0" layoutY="125.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" />
+                        <TextField fx:id="addAllValidDay" layoutX="120.0" layoutY="80.0" prefHeight="30.0" prefWidth="100.0" />
+                        <Label prefHeight="30.0" prefWidth="120.0" text="Mô tả phí đóng góp" />
+                        <Label layoutY="40.0" prefHeight="30.0" prefWidth="120.0" text="Tiền đóng góp" />
+                        <Label layoutY="80.0" prefHeight="30.0" prefWidth="120.0" text="Thời hạn đóng" />
+                        <Button layoutX="120.0" layoutY="180.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Gửi thông báo">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <ImageView fitHeight="96.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/banner.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="1228.0" layoutY="2.0" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #d0eeff;" text="Đăng xuất" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="1160.0" layoutY="33.0" prefHeight="30.0" prefWidth="130.0" text="Loại tài khoản: Admin" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0" />
+   </children>
+</AnchorPane>
