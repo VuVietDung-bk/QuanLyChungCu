@@ -8,9 +8,9 @@ import java.sql.*;
 
 public class DatabaseConnecter {
 
-	private static final String URL = "jdbc:mysql://127.0.0.1:3306/apartmentmanagement";
+	private static final String URL = "jdbc:mysql://localhost:3306/apartmentmanagement";
     private static final String USER = "root";
-    private static final String PASSWORD = "Vl271104*";
+    private static final String PASSWORD = "provnYT2005";
     
     public static Connection getConnection() throws DatabaseConnectionException {
         Connection connection = null;
@@ -504,6 +504,8 @@ public class DatabaseConnecter {
             }
             resultSet.close();
             preparedStatement.close();
+            
+            connection.commit();
         } catch (SQLException | DatabaseConnectionException e) {
             e.printStackTrace();
             if (connection != null) {
