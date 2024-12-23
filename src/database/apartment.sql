@@ -1,4 +1,4 @@
--- Create the database
+-- Initialize the database
 CREATE DATABASE IF NOT EXISTS ApartmentManagement;
 USE ApartmentManagement;
 
@@ -35,9 +35,11 @@ CREATE TABLE Fee (
     id INT PRIMARY KEY AUTO_INCREMENT,
     apartmentID VARCHAR(12),
     typeFee VARCHAR(255) DEFAULT 'Living Expenses',
-    isForced INT DEFAULT 1,
+    isForced INT DEFAULT 0,
     status INT DEFAULT 0,
     amount INT DEFAULT 0,
+    fromDate DATE,
+    toDate DATE,
     FOREIGN KEY (apartmentID) REFERENCES Apartment(id)
 );
 
@@ -60,39 +62,45 @@ CREATE TABLE Vehicle (
 
 -- Insert sample data into Resident
 INSERT INTO Resident (id, name, phone) VALUES
-('038201000001', 'John Doe', '123-456-7890'),
-('038201000002', 'Alice Smith', '987-654-3210'),
-('038201000003', 'Bruce Wayne', '555-123-4567');
+('038201000001', 'Nguyen Van A', '1234567890'),
+('038201000002', 'Le Quoc Vuong', '9876543210'),
+('038201000003', 'Le Dinh Hung Anh', '5551234567'),
+('038201000004', 'Vu Viet Dung', '9876543218'),
+('038201000005', 'Le Xuan Phuc', '5551234544');
 
 -- Insert sample data into Account
 INSERT INTO Account (residentID, username, password, type) VALUES
-('038201000001', 'johndoe', 'password123', 'user'),
-('038201000002', 'alicesmith', 'password456', 'user'),
-('038201000003', 'admin', 'adminpass', 'admin');
+('038201000001', 'aihoimatraloi', 'alandibo', 'user'),
+('038201000002', 'admin', 'admin1', 'admin'),
+('038201000003', 'batman', 'darkknight', 'user');
 
 -- Insert sample data into Apartment
 INSERT INTO Apartment (id, ownerID, vehicleAmount, electric, water, area) VALUES
-('APT001', '038201000001', 2, 500, 300, 1200),
-('APT002', '038201000002', 1, 700, 400, 1500),
-('APT003', '038201000003', 3, 800, 600, 2000);
+('APT001', '038201000001', 1, 200, 150, 1000),
+('APT002', '038201000002', 2, 300, 250, 1200),
+('APT003', '038201000003', 3, 400, 300, 1500);
 
 -- Insert sample data into Fee
-INSERT INTO Fee (apartmentID, typeFee, isForced, status, amount) VALUES
-('APT001', 'Living Expenses', 1, 1, 1000),
-('APT002', 'Water', 1, 0, 500),
-('APT003', 'Electricity', 1, 1, 1500);
+INSERT INTO Fee (apartmentID, typeFee, isForced, status, amount, fromDate, toDate) VALUES
+('APT001', 'Living Expenses', 1, 0, 1000, '2024-12-01', '2024-12-31'),
+('APT002', 'Electricity', 1, 0, 500, '2024-12-01', '2024-12-31'),
+('APT003', 'Water', 1, 1, 300, '2024-12-01', '2024-12-31');
 
 -- Insert sample data into Relationship
 INSERT INTO Relationship (id, ownerID, relationship) VALUES
-('038201000002', '038201000001', 'Spouse'),
-('038201000003', '038201000002', 'Sibling'),
-('038201000001', '038201000003', 'Parent');
+('038201000004', '038201000002', 'Anh em'),
+('038201000005', '038201000003', 'Bo');
 
 -- Insert sample data into Vehicle
 INSERT INTO Vehicle (vehicleID, apartmentID, type) VALUES
-('VEH123', 'APT001', 'Car'),
-('VEH124', 'APT001', 'Bike'),
-('VEH125', 'APT002', 'Scooter'),
-('VEH126', 'APT003', 'Truck'),
-('VEH127', 'APT003', 'Motorcycle'),
-('VEH128', 'APT003', 'Bicycle');
+('VEH001', 'APT001', 'Car'),
+('VEH002', 'APT002', 'Bike'),
+('VEH003', 'APT003', 'Bike');
+
+-- Query data to verify the database
+SELECT * FROM Resident;
+SELECT * FROM Account;
+SELECT * FROM Apartment;
+SELECT * FROM Fee;
+SELECT * FROM Relationship;
+SELECT * FROM Vehicle;
